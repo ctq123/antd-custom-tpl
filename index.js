@@ -50,7 +50,7 @@ module.exports = class GeneratorAntdCustom extends Generator {
     this.log(`开始安装项目依赖包...`)
     this.log()
     const projectDir = path.join(process.cwd(), this.answers.name)
-    this.spawnCommandSync('npm', ['install', '--registry=https://registry.npm.org'], { cwd: projectDir })
+    this.spawnCommandSync('npm', ['install', '--registry=https://registry.npmjs.org'], { cwd: projectDir })
   }
 
   end() {
