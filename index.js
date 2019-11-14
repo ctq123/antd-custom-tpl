@@ -59,7 +59,9 @@ module.exports = class GeneratorAntdCustom extends Generator {
     this.console()
     this.console(`项目依赖包安装完成！`)
     this.console()
-    this.console(`一切准备就绪！运行 npm start 启动项目`)
+    this.console(`一切准备就绪！启动项目步骤如下：`)
+    this.console(`1）进入当前目录：${this.props.name}`)
+    this.console(`2）手动运行命令：cfe start`)
     this.console()
     process.exit(0)
   }
