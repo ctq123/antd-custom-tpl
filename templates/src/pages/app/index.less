@@ -1,0 +1,21 @@
+.app {
+  min-height: 100vh;
+
+  :global { // 定义全局css变量
+    .pointer {
+      cursor: pointer;
+    }
+    a {
+      cursor: pointer;
+    }
+    .pagination-right {
+      display: flex;
+      margin: 16px 0px;
+      justify-content: flex-end;
+    }
+    .ant-pagination-options-size-changer.ant-select {
+      margin-right: 0px;
+    }
+  }
+}
+

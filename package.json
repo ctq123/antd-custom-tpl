@@ -1,0 +1,18 @@
+{
+  "name": "antd-custom-tpl",
+  "version": "0.0.1",
+  "description": "antd-custom项目模板",
+  "main": "index.js",
+  "author": "ctq123",
+  "repository": "https://github.com/ctq123/antd-custom-tpl.git",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "脚手架",
+    "generator"
+  ],
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "yeoman-generator": "^4.2.0"
+  }
+}
