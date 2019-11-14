@@ -35,6 +35,7 @@ module.exports = class GeneratorAntdCustom extends Generator {
 
   writing() {
     const { name } = this.props
+    let done = this.async()
     // 改写并复制package.json文件
     const tmplpkg = this.fs.readJSON(this.templatePath('package.json'), {})
     this.fs.writeJSON(this.destinationPath(name, 'package.json'), { ...tmplpkg, ...this.props })
@@ -44,25 +45,31 @@ module.exports = class GeneratorAntdCustom extends Generator {
     .forEach(item => {
       this.fs.copy(this.templatePath(item), this.destinationPath(name, item))
     })
+    this.fs.commit([], () => {
+      this.console(`复制模板完成`)
+      this.log()
+      done()
+    })
   }
 
   install() {
-    this.log(`开始安装项目依赖包...`)
-    this.log()
-    const projectDir = path.join(process.cwd(), this.answers.name)
+    this.console()
+    this.console(`开始安装项目依赖包...`)
+    this.console()
+    const projectDir = path.join(process.cwd(), this.props.name)
     this.spawnCommandSync('npm', ['install', '--registry=https://registry.npmjs.org'], { cwd: projectDir })
   }
 
   end() {
-    this.log()
-    this.log(`项目依赖包安装完成！`)
-    this.log()
-    this.log(`一切准备就绪！运行 npm start 启动项目`)
-    this.log()
+    this.console()
+    this.console(`项目依赖包安装完成！`)
+    this.console()
+    this.console(`一切准备就绪！运行 npm start 启动项目`)
+    this.console()
     process.exit(0)
   }
 
-  log(str='', color='yellow') {
+  console(str='', color='yellow') {
     const co = chalk[color] || chalk.yellow
     console.log(co(str))
   }
