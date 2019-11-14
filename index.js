@@ -45,17 +45,12 @@ module.exports = class GeneratorAntdCustom extends Generator {
     .forEach(item => {
       this.fs.copy(this.templatePath(item), this.destinationPath(name, item))
     })
-    this.fs.commit([], () => {
-      this.console(`复制模板完成`)
-      this.log()
-      done()
-    })
+    // 使用commit确认马上提交，消除各种打印创建文件的无用日志
+    this.fs.commit([], () => { done() })
   }
 
   install() {
-    this.console()
     this.console(`开始安装项目依赖包...`)
-    this.console()
     const projectDir = path.join(process.cwd(), this.props.name)
     this.spawnCommandSync('npm', ['install', '--registry=https://registry.npmjs.org'], { cwd: projectDir })
   }
