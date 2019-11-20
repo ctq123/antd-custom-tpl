@@ -1,10 +1,13 @@
 {
   "name": "antd-custom-tpl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "antd-custom项目模板",
   "author": "ctq123",
   "repository": "https://github.com/ctq123/antd-custom-tpl.git",
   "license": "MIT",
+  "files": [
+    "templates"
+  ],
   "keywords": [
     "cli",
     "脚手架",
