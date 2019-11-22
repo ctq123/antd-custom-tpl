@@ -23,10 +23,10 @@ class SearchFormClass extends PureComponent {
   }
 
   handleSearch = (data = {}) => {
-    const { onReaultCB, pagination } = this.props
+    const { onResultCB, pagination } = this.props
     const { pageNum, pageSize } = pagination
     const formData = this.formData || {}
-    onReaultCB && onReaultCB({ loading: true })
+    onResultCB && onResultCB({ loading: true })
     
     let params = {
       pageNum,
@@ -40,10 +40,11 @@ class SearchFormClass extends PureComponent {
       // console.log("resp", resp)
       const { rows, totalCount } = resp || {}
       if (rows) {
-        onReaultCB && onReaultCB({ 
+        onResultCB && onResultCB({ 
           data: rows,
           pagination: {
-            ...pagination,
+            pageNum: params.pageNum,
+            pageSize: params.pageSize,
             total: totalCount
           }
         })
@@ -53,7 +54,7 @@ class SearchFormClass extends PureComponent {
       utils.showMessageError('查询用户列表失败', err)
     })
     .finally(()=> {
-      onReaultCB && onReaultCB({ loading: false })
+      onResultCB && onResultCB({ loading: false })
     })
   }
 
