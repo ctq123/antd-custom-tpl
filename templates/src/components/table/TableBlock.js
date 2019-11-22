@@ -25,7 +25,8 @@ class TableBlock extends PureComponent {
   }
 
   render() {
-    const { list, columns, total, loading, rowKey, showTopBlock, leftTopNode, showBottomBlock, leftBottomNode, pageNum } = this.props
+    const { list, columns, total, loading, rowKey, showTopBlock, leftTopNode, 
+      showBottomBlock, leftBottomNode, pageNum, pageSize } = this.props
     return (
       <Fragment>
         {
@@ -36,7 +37,8 @@ class TableBlock extends PureComponent {
               className='pagination-right'
               showSizeChanger
               showTotal={total => `共 ${total} 条`}
-              current={pageNum} 
+              current={pageNum}
+              pageSize={pageSize} 
               total={total} 
               onShowSizeChange={this.onShowSizeChange}
               onChange={this.onPageChange} />
@@ -52,6 +54,7 @@ class TableBlock extends PureComponent {
               showSizeChanger
               showTotal={total => `共 ${total} 条`}
               current={pageNum} 
+              pageSize={pageSize}
               total={total} 
               onShowSizeChange={this.onShowSizeChange}
               onChange={this.onPageChange} />

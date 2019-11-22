@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
-import { Form, Row, Col, Input, Button, Select } from 'antd'
+import { Form, Row, Col, Button, Select } from 'antd'
 import { injectIntl } from 'react-intl'
+import LimitInput from '@components/input/LimitInput'
 import utils from '@utils'
 import styles from './index.less'
 
@@ -76,7 +77,7 @@ class SearchFormClass extends PureComponent {
                     message: `${intl.formatMessage({ id: 'Code cannot be empty' })}`,
                   },
                 ],
-              })(<Input placeholder={`${intl.formatMessage({ id: 'Enter Code' })}`} allowClear />)}
+              })(<LimitInput placeholder={`${intl.formatMessage({ id: 'Enter Code' })}`} />)}
             </FormItem>
           </Col>
           <Col span={24/col}>

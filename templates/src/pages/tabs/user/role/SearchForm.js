@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Row, Col, Input, Button } from 'antd'
+import { Form, Row, Col, Button } from 'antd'
 import utils from '@utils'
+import LimitInput from '@components/input/LimitInput'
 
 const FormItem = Form.Item
 
@@ -18,7 +19,7 @@ const SearchForm = (props) => {
       console.log('Received values of form: ', values)
       if (!err) {
         setFormData(values)
-        handleSearch({ pageNum: 1 })
+        handleSearch({ pageNum: 1, ...values })
       } else {
         setFormData({})
       }
@@ -73,7 +74,7 @@ const SearchForm = (props) => {
                   whitespace: true,
                 },
               ],
-            })(<Input allowClear />)}
+            })(<LimitInput placeholder={'请输入名称'} />)}
           </FormItem>
         </Col>
         <Col span={8}>
