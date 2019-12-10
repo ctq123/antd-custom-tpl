@@ -27,7 +27,7 @@ const SearchForm = (props) => {
   }
 
   const handleSearch = (data = {}) => {
-    const { pageNum, pageSize, onResultCB } = props
+    const { current: pageNum, pageSize, onResultCB } = props
     
     let params = {
       pageNum,
@@ -46,7 +46,7 @@ const SearchForm = (props) => {
         onResultCB && onResultCB({ 
           list: rows,
           total: totalCount,
-          pageNum: params.pageNum,
+          current: params.pageNum,
         })
       }
     })

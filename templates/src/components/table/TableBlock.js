@@ -11,22 +11,23 @@ class TableBlock extends PureComponent {
   onShowSizeChange = (cur_page, page_size) => {
     const { searchCB } = this.props
     searchCB({ 
-      pageNum: 1,
+      current: 1,
       pageSize: page_size 
     })
   }
 
   onPageChange = (page) => {
-    const { searchCB, pageSize } = this.props
+    const { searchCB, paginationProps } = this.props
+    const { pageSize } = paginationProps
     searchCB({ 
-      pageNum: page,
+      current: page,
       pageSize,
     })
   }
 
   render() {
-    const { list, columns, total, loading, rowKey, showTopBlock, leftTopNode, 
-      showBottomBlock, leftBottomNode, pageNum, pageSize } = this.props
+    const { tableProps, paginationProps, showTopBlock, leftTopNode, 
+      showBottomBlock, leftBottomNode } = this.props
     return (
       <Fragment>
         {
@@ -36,15 +37,13 @@ class TableBlock extends PureComponent {
             <Pagination 
               className='pagination-right'
               showSizeChanger
-              showTotal={total => `共 ${total} 条`}
-              current={pageNum}
-              pageSize={pageSize} 
-              total={total} 
+              showTotal={total => `共 ${total} 条`} 
               onShowSizeChange={this.onShowSizeChange}
-              onChange={this.onPageChange} />
+              onChange={this.onPageChange}
+              { ...paginationProps } />
           </div> : null
         }
-        <Table bordered pagination={false} columns={columns} dataSource={list} rowKey={rowKey} loading={loading} />
+        <Table bordered pagination={false} { ...tableProps } />
         {
           showBottomBlock ?
           <div className={styles.between}>
@@ -53,11 +52,9 @@ class TableBlock extends PureComponent {
               className='pagination-right'
               showSizeChanger
               showTotal={total => `共 ${total} 条`}
-              current={pageNum} 
-              pageSize={pageSize}
-              total={total} 
               onShowSizeChange={this.onShowSizeChange}
-              onChange={this.onPageChange} />
+              onChange={this.onPageChange}
+              { ...paginationProps } />
           </div> : null
         }
       </Fragment>
@@ -66,28 +63,34 @@ class TableBlock extends PureComponent {
 }
 
 TableBlock.propTypes = {
-  list: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired,
-  total: PropTypes.number.isRequired,
+  tableProps: PropTypes.object.isRequired,
+  paginationProps: PropTypes.object.isRequired,
   searchCB: PropTypes.func.isRequired,
 }
 
 TableBlock.defaultProps = {
-  /**table数据 */
-  list: [],
-  /**table头 */
-  columns: [],
-  /**分页总条数 */
-  total: 0,
-  /**分页页码 */
-  pageNum: 1,
-  /**分页每页页数 */
-  pageSize: 10,
+  /**table原生属性 */
+  tableProps: {
+    /**table数据 */
+    dataSource: [],
+    /**table头 */
+    columns: [],
+    /**table每行key值，默认为id */
+    rowKey: 'id',
+    /**table加载状态 */
+    loading: false,
+  },
+  /**分页原生属性 */
+  paginationProps: {
+    /**分页总条数 */
+    total: 0,
+    /**分页页码 */
+    current: 1,
+    /**分页每页页数 */
+    pageSize: 10,
+  },
   /**分页查询回调 */
   searchCB: () => {},
-  loading: false,
-  /**table每行key值 */
-  rowKey: 'id',
   /**是否显示上分页区域 */
   showTopBlock: true,
   /**上分页-左上侧显示内容 */

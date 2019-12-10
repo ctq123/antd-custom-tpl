@@ -10,7 +10,7 @@ const Role = () => {
   const [ list, setList ] = useState([])
   const [ loading, setLoading ] = useState(false)
   /**查询信号searchFlag，只要发生变化就会发起查询 */
-  const [ pagination, setPagination ] = useState({ searchFlag: false, pageNum: 1, pageSize: 10, total: 0 })
+  const [ pagination, setPagination ] = useState({ searchFlag: false, current: 1, pageSize: 10, total: 0 })
 
   const columns = [
     {
@@ -45,14 +45,14 @@ const Role = () => {
   ]
 
 
-  const handleResultCB = ({ loading, list, total, pageNum }) => {
+  const handleResultCB = ({ loading, list, total, current }) => {
     if (loading !== undefined) setLoading(loading)
     if (list !== undefined) setList(list)
-    if (total !== undefined) setPagination((data) => ({ ...data, total, pageNum }))
+    if (total !== undefined) setPagination((data) => ({ ...data, total, current }))
   }
 
-  const handleSearch = ({ pageNum, pageSize }) => {
-    setPagination(data => ({ ...data, pageNum, pageSize, searchFlag: !data.searchFlag }))
+  const handleSearch = ({ current, pageSize }) => {
+    setPagination(data => ({ ...data, current, pageSize, searchFlag: !data.searchFlag }))
   }
 
   const handleAdd = (e) => {
@@ -66,10 +66,12 @@ const Role = () => {
   }
 
   const tableBlockProps = {
-    list,
-    columns,
-    loading,
-    ...pagination,
+    tableProps: {
+      dataSource: list,
+      columns,
+      loading,
+    },
+    paginationProps: pagination,
     searchCB: handleSearch,
     showBottomBlock: true,
     leftTopNode: <Button type="primary" onClick={(e) => handleAdd(e)}>新增</Button>

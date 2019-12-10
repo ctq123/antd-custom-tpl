@@ -25,7 +25,7 @@ class SearchFormClass extends PureComponent {
 
   handleSearch = (data = {}) => {
     const { onResultCB, pagination } = this.props
-    const { pageNum, pageSize } = pagination
+    const { current:pageNum, pageSize } = pagination
     const formData = this.formData || {}
     onResultCB && onResultCB({ loading: true })
     
@@ -44,7 +44,7 @@ class SearchFormClass extends PureComponent {
         onResultCB && onResultCB({ 
           data: rows,
           pagination: {
-            pageNum: params.pageNum,
+            current: params.pageNum,
             pageSize: params.pageSize,
             total: totalCount
           }

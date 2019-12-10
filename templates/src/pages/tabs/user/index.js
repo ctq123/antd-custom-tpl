@@ -47,7 +47,7 @@ class User extends PureComponent {
       data: [],
       loading: false,
       pagination: {
-        pageNum: 1,
+        current: 1,
         pageSize: 10,
         total: 0,
       },
@@ -58,12 +58,12 @@ class User extends PureComponent {
     this.callFormSearch()
   }
 
-  handleSearch = ({ pageNum, pageSize }) => {
+  handleSearch = ({ current, pageSize }) => {
     const { pagination } = this.state
     this.setState({
       pagination: {
         ...pagination,
-        pageNum,
+        current,
         pageSize,
       }
     }, () => { this.callFormSearch() })
@@ -101,10 +101,12 @@ class User extends PureComponent {
     }
 
     const tableBlockProps = {
-      list: data,
-      columns,
-      loading,
-      ...pagination,
+      tableProps: {
+        dataSource: data,
+        columns,
+        loading,
+      },
+      paginationProps: pagination,
       searchCB: this.handleSearch,
       leftTopNode: <Button type="primary" onClick={(e) => exportData(e)}>导出当前页</Button>
     }
