@@ -25,7 +25,7 @@ const model = {
     ],
     menuList: [],
     existRoute: {}, // 用户路由列表
-    isNeedPermission: false, /** 是否需要菜单-路由权限控制，默认需要 */
+    isNeedPermission: true, /** 是否需要菜单-路由权限控制，默认需要 */
   },
   // reducer
   reducers: {
