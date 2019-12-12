@@ -102,7 +102,7 @@
     "progress-bar-webpack-plugin": "^1.11.0",
     "file-loader": "2.0.0",
     "git-repo-info": "^2.1.0",
-    "webpack": "4.26.1",
+    "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.11"
   },

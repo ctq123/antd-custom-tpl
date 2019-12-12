@@ -5,10 +5,17 @@ import styles from './index.less'
 
 const Virtual = () => {
   const [dataSource, setDataSource] = useState([])
+  const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({ pageNum: 1, pageSize: 100 })
 
   useEffect(() => {
-    setDataSource(generateData(1000000))
+    setLoading(true)
+    // 模拟请求数据，实际中大数据是不可能一次性请求回来的，可采用分批请求
+    const timeId = setTimeout(function() {
+      setDataSource(generateData(1000000))
+      setLoading(false)
+    }, 300)
+    return () => { clearTimeout(timeId) }
   }, [])
 
   const columns = [
@@ -83,6 +90,7 @@ const Virtual = () => {
                 rowKey='id'
                 pagination={ false }
                 scroll={{ y: 400 }}
+                loading={loading}
                 bordered
               />
               <Pagination
