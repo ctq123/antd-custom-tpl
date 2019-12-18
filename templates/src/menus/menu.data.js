@@ -60,6 +60,13 @@ export const menus = [
     permKey: true, 
     children: [] 
   },
+  { 
+    name: '数据转换', 
+    path: '/app/exchange', 
+    icon: 'box-plot', 
+    permKey: true, 
+    children: [] 
+  },
   {
     name: '运营工具', 
     path: '/app/optool', 
